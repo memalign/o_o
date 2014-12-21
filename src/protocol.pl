@@ -44,8 +44,10 @@ sub procProt
 sub killDeadSocket
 {
     my ($sock) = @_;
-    $sock->close();
-    $select->remove($sock);
+    if (defined $sock) {
+        $sock->close();
+        $select->remove($sock);
+    }
     &doConnect();
 }
 
